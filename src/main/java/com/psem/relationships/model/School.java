@@ -6,11 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="educational_institution")
+@Table(name="educational_institutions")
 public class School {
 
     @Id
@@ -19,5 +21,16 @@ public class School {
 
     @NotBlank
     private String schoolName;
+
+    // Using mappedBy to make relationship with addresses table bidirectional.
+    @OneToOne(mappedBy = "school",
+                cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Address address;
+
+    // Method to guarantee that bidirectional connection will be set, when School and Address objects are created.
+    public void setAddress(Address address){
+        address.setSchool(this);
+        this.address = address;
+    }
 
 }
