@@ -6,10 +6,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -26,6 +25,22 @@ public class SchoolController {
 
         // Return saved object with HttpStatus.
         return new ResponseEntity<>(savedSchool, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/schools/{schoolId}")
+    public ResponseEntity<String> deleteSchool(@PathVariable Long schoolId){
+
+        schoolService.deleteSchool(schoolId);
+
+        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
+    }
+
+    @GetMapping("/schools")
+    public ResponseEntity<List<School>> getAllSchools(){
+
+        List schools = schoolService.getAllSchools();
+
+        return new ResponseEntity<>(schools, HttpStatus.OK);
     }
 
 }
