@@ -8,6 +8,7 @@ This project is about handling oneToOne, OneToMany and vice versa and ManyToMany
 Also covering topics like custom exceptions and DTOs.
 
 Picked very "original" model, but it covers everything what I needed:
+https://github.com/user-attachments/assets/8168dde0-b763-46ab-a9ff-fc5ae49a5efd
 
 Postman requests in json file format provided with a project.
 
