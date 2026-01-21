@@ -1,10 +1,10 @@
 {
   "info": {
-    "_postman_id": "1902634b-bcf1-401f-b57a-ade37907942b",
-    "name": "Relationships",
+    "_postman_id": "6b16933d-e345-4323-9fe8-91f544eb58ea",
+    "name": "Relationships Copy",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "50544320",
-    "_collection_link": "https://go.postman.co/collection/50544320-1902634b-bcf1-401f-b57a-ade37907942b?source=collection_link"
+    "_collection_link": "https://go.postman.co/collection/50544320-6b16933d-e345-4323-9fe8-91f544eb58ea?source=collection_link"
   },
   "item": [
     {
@@ -131,7 +131,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "http://localhost:8080/api/public/students",
+              "raw": "http://localhost:8080/api/students",
               "protocol": "http",
               "host": [
                 "localhost"
@@ -139,7 +139,6 @@
               "port": "8080",
               "path": [
                 "api",
-                "public",
                 "students"
               ]
             }
@@ -171,8 +170,23 @@
         {
           "name": "AddProgramForStudent",
           "request": {
-            "method": "GET",
-            "header": []
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/students/1/programs/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "students",
+                "1",
+                "programs",
+                "1"
+              ]
+            }
           },
           "response": []
         }
@@ -219,8 +233,31 @@
         {
           "name": "AddProgram",
           "request": {
-            "method": "GET",
-            "header": []
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"programName\": \"Java\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/schools/1/programs",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "schools",
+                "1",
+                "programs"
+              ]
+            }
           },
           "response": []
         },
