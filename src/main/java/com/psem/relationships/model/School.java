@@ -24,8 +24,8 @@ public class School {
     private String schoolName;
 
     // Using mappedBy to make relationship with addresses table bidirectional.
-    @OneToOne(mappedBy = "school",
-
+    // set FetchType to Lazy so it won't fetch address data by default.
+    @OneToOne(mappedBy = "school", fetch = FetchType.LAZY,
                 cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private Address address;
 
@@ -42,5 +42,12 @@ public class School {
             CascadeType.REMOVE}, orphanRemoval = true)
 
     private List<Student> students = new ArrayList<>();
+
+
+    @OneToMany(mappedBy = "school", cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REMOVE}, orphanRemoval = true)
+    private List<Program> programs = new ArrayList<>();
 
 }

@@ -14,4 +14,6 @@ public interface StudentService {
 
     void removeStudent(Long studentId);
 
+    void addProgramForStudent(Long studentId, Long programId);
+
 }

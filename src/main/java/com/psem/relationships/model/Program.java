@@ -1,10 +1,16 @@
 package com.psem.relationships.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
 
 @Entity
 @Data
@@ -19,4 +25,18 @@ public class Program {
 
     @NotBlank
     private String programName;
+
+
+    @ManyToMany(mappedBy = "programs", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Student> students = new HashSet<>();
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(programId);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "school_id")
+    @JsonIgnore
+    private School school;
 }

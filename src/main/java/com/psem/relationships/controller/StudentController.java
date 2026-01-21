@@ -27,7 +27,7 @@ public class StudentController {
 
     }
 
-    @GetMapping("/public/students")
+    @GetMapping("/students")
     private ResponseEntity<List<Student>> getAllStudents(){
 
         List<Student> students = studentService.getAllStudents();
@@ -35,7 +35,7 @@ public class StudentController {
         return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
-    @DeleteMapping("/public/students/{studentId}")
+    @DeleteMapping("/students/{studentId}")
     public ResponseEntity<String> removeStudent(@PathVariable Long studentId){
 
         studentService.removeStudent(studentId);
@@ -43,4 +43,12 @@ public class StudentController {
         return new ResponseEntity<>("Student removed successfully", HttpStatus.OK);
     }
 
+    @PostMapping("/students/{studentId}/programs/{programId}")
+    public ResponseEntity<String> addProgramForStudent(@PathVariable Long studentId,
+                                                       @PathVariable Long programId) {
+
+        studentService.addProgramForStudent(studentId, programId);
+
+        return new ResponseEntity<>("Program added successfully for student with ID: " + studentId, HttpStatus.OK);
+    }
 }

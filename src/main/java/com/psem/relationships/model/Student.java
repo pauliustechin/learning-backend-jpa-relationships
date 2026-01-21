@@ -5,7 +5,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import java.util.*;
 
 @Entity
 @NoArgsConstructor
@@ -28,5 +31,20 @@ public class Student {
     @JoinColumn(name="school_id")
     @JsonIgnore
     private School school;
+
+    @ManyToMany//(mappedBy = "students", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonIgnore
+    // set table name and column names for a cross table.
+    @JoinTable(
+            name="student_programs",
+            joinColumns = @JoinColumn(name="student_id"),
+            inverseJoinColumns = @JoinColumn(name="program_id")
+    )
+    private Set<Program> programs = new HashSet<>();
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(studentId);
+    }
 
 }
