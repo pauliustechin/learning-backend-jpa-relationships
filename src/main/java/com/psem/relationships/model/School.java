@@ -6,11 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="educational_institutions")
+@Table(name="schools")
 public class School {
 
     @Id
@@ -22,6 +25,7 @@ public class School {
 
     // Using mappedBy to make relationship with addresses table bidirectional.
     @OneToOne(mappedBy = "school",
+
                 cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private Address address;
 
@@ -30,5 +34,13 @@ public class School {
         address.setSchool(this);
         this.address = address;
     }
+
+    // Orphan removal - remove all students in case school is removed.
+    @OneToMany(mappedBy = "school", cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REMOVE}, orphanRemoval = true)
+
+    private List<Student> students = new ArrayList<>();
 
 }
