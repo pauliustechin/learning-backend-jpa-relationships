@@ -1,8 +1,11 @@
 package com.psem.relationships.controller;
 
 import com.psem.relationships.model.School;
+import com.psem.relationships.payload.SchoolDTO;
+import com.psem.relationships.payload.SchoolResponse;
 import com.psem.relationships.service.SchoolService;
 import jakarta.validation.Valid;
+import jdk.jfr.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +22,9 @@ public class SchoolController {
 
     // @Valid annotation, to check added validation in School model
     @PostMapping("/schools")
-    public ResponseEntity<School> saveSchool(@Valid @RequestBody School school){
+    public ResponseEntity<SchoolDTO> saveSchool(@Valid @RequestBody School school){
 
-        School savedSchool = schoolService.saveSchool(school);
+        SchoolDTO savedSchool = schoolService.saveSchool(school);
 
         // Return saved object with HttpStatus.
         return new ResponseEntity<>(savedSchool, HttpStatus.CREATED);
@@ -36,9 +39,9 @@ public class SchoolController {
     }
 
     @GetMapping("/schools")
-    public ResponseEntity<List<School>> getAllSchools(){
+    public ResponseEntity<SchoolResponse> getAllSchools(){
 
-        List schools = schoolService.getAllSchools();
+        SchoolResponse schools = schoolService.getAllSchools();
 
         return new ResponseEntity<>(schools, HttpStatus.OK);
     }
