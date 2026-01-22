@@ -1,5 +1,6 @@
 package com.psem.relationships.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -18,6 +19,7 @@ public class School {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long schoolId;
 
     @NotBlank
@@ -35,6 +37,7 @@ public class School {
         this.address = address;
     }
 
+    @JsonIgnore // exclude from swagger documentation
     // Orphan removal - remove all students in case school is removed.
     @OneToMany(mappedBy = "school", cascade = {
             CascadeType.PERSIST,
@@ -43,7 +46,7 @@ public class School {
 
     private List<Student> students = new ArrayList<>();
 
-
+    @JsonIgnore // exclude from swagger documentation
     @OneToMany(mappedBy = "school", cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,

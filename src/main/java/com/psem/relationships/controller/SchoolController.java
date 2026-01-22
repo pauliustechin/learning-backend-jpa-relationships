@@ -4,8 +4,9 @@ import com.psem.relationships.model.School;
 import com.psem.relationships.payload.SchoolDTO;
 import com.psem.relationships.payload.SchoolResponse;
 import com.psem.relationships.service.SchoolService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import jdk.jfr.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,8 @@ public class SchoolController {
     @Autowired
     private SchoolService schoolService;
 
+    @Tag(name="Schools APIs", description = "APIs for managing schools")
+    @Operation(summary = "Add new school")
     // @Valid annotation, to check added validation in School model
     @PostMapping("/schools")
     public ResponseEntity<SchoolDTO> saveSchool(@Valid @RequestBody School school){
@@ -30,6 +33,8 @@ public class SchoolController {
         return new ResponseEntity<>(savedSchool, HttpStatus.CREATED);
     }
 
+    @Tag(name="Schools APIs")
+    @Operation(summary = "Delete school")
     @DeleteMapping("/schools/{schoolId}")
     public ResponseEntity<String> deleteSchool(@PathVariable Long schoolId){
 
@@ -38,6 +43,8 @@ public class SchoolController {
         return new ResponseEntity<>("School with ID: " + schoolId + " deleted successfully", HttpStatus.OK);
     }
 
+    @Tag(name="Schools APIs")
+    @Operation(summary = "Get all schools")
     @GetMapping("/schools")
     public ResponseEntity<SchoolResponse> getAllSchools(){
 

@@ -5,7 +5,7 @@ before moving forward with frontend part decided to split what I've learned into
 and try to improve my skills by making simplified projects by myself.
 
 This project is about handling oneToOne, OneToMany and vice versa and ManyToMany relationships with JPA. 
-Also covering topics like custom exceptions and DTOs.
+Also covering topics like custom exceptions, cascading, DTOs (data transfer objects) and customizing swagger documentation. 
 
 Picked very "original" model, but it covers everything what I needed:
 https://github.com/user-attachments/assets/8168dde0-b763-46ab-a9ff-fc5ae49a5efd
@@ -18,7 +18,8 @@ Run file:
 H2 database console (default connection): 
 > http://localhost:8080/h2-console
 
-
+Documentation with swagger:
+>http://localhost:8080/swagger-ui/index.html
 
 
 

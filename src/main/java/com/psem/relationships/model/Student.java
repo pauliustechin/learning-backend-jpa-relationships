@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.*;
@@ -19,6 +18,7 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long studentId;
 
     @NotBlank
@@ -33,7 +33,7 @@ public class Student {
     private School school;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JsonIgnore
+    @JsonIgnore // exclude from swagger documentation
     // set table name and column names for a cross table.
     @JoinTable(
             name="student_programs",

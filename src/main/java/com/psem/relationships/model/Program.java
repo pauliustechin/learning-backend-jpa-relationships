@@ -21,12 +21,13 @@ public class Program {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long programId;
 
     @NotBlank
     private String programName;
 
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "programs")
     private Set<Student> students = new HashSet<>();
 
@@ -37,6 +38,6 @@ public class Program {
 
     @ManyToOne
     @JoinColumn(name = "school_id")
-    @JsonIgnore
+    @JsonIgnore // exclude from swagger documentation
     private School school;
 }

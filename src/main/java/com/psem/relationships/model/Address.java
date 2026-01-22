@@ -17,6 +17,9 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // Add @JsonIgnore to each id fields in all models to exclude it from request body in swagger documentation.
+    // Response can be and should be controlled with DTOs.
+    @JsonIgnore
     private Long addressId;
 
     @NotBlank
