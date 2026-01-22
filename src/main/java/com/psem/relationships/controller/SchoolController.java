@@ -35,7 +35,7 @@ public class SchoolController {
 
         schoolService.deleteSchool(schoolId);
 
-        return new ResponseEntity<>("Deleted successfully", HttpStatus.OK);
+        return new ResponseEntity<>("School with ID: " + schoolId + " deleted successfully", HttpStatus.OK);
     }
 
     @GetMapping("/schools")

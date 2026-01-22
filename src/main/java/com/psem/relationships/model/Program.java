@@ -27,7 +27,7 @@ public class Program {
     private String programName;
 
 
-    @ManyToMany(mappedBy = "programs", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @ManyToMany(mappedBy = "programs")
     private Set<Student> students = new HashSet<>();
 
     @Override

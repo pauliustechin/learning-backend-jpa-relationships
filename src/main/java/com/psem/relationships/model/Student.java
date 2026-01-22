@@ -32,7 +32,7 @@ public class Student {
     @JsonIgnore
     private School school;
 
-    @ManyToMany//(mappedBy = "students", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
     // set table name and column names for a cross table.
     @JoinTable(
@@ -41,6 +41,12 @@ public class Student {
             inverseJoinColumns = @JoinColumn(name="program_id")
     )
     private Set<Program> programs = new HashSet<>();
+
+    // add helper method to delete entities from owner side.
+    public void removeProgram(Program program){
+        this.programs.remove(program);
+        program.getStudents().remove(this);
+    }
 
     @Override
     public int hashCode(){

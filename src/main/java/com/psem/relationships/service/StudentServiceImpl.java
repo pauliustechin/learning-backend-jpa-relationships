@@ -53,10 +53,16 @@ public class StudentServiceImpl implements StudentService{
     @Override
     public void removeStudent(Long studentId) {
 
-        Student deletedStudent = studentRepository.findById(studentId)
+        Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Student with id: " + studentId + "not found"));
 
-        studentRepository.delete(deletedStudent);
+        // before deleting student, removing all associated programs in junction table.
+        student.getPrograms().forEach(program -> {
+            student.removeProgram(program);
+        });
+
+        // then deleting a student.
+        studentRepository.delete(student);
     }
 
     @Override
